@@ -1,44 +1,27 @@
-# Gradle
+# Gradle / Android build outputs
 .gradle/
 build/
-!gradle/wrapper/gradle-wrapper.jar
-!**/src/main/**/build/
-!**/src/test/**/build/
-
-# IDE
-.idea/
-*.iml
-*.iws
-*.ipr
-.vscode/
-*.swp
-*.swo
-*~
-
-# Android Studio
-*.jks
-*.keystore
-!debug.keystore
-local.properties
+app/build/
 captures/
-.externalNativeBuild/
-.cxx/
+local.properties
 
-# Signing
-release.keystore
+# Signing and release artifacts
 *.keystore
-
-# OS
-.DS_Store
-Thumbs.db
-desktop.ini
-
-# Build outputs
+*.jks
+*.p12
 *.apk
 *.aab
-*.dex
-*.class
+*.apks
+*.idsig
 
-# APK signing
-app/release/
-app/debug/
+# IDE / OS files
+.idea/
+*.iml
+.DS_Store
+
+# Local secrets and deployment notes
+*.env
+*.local
+secrets.*
+deployment/
+deploy/

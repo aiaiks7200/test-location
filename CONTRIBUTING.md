@@ -1,95 +1,35 @@
 # Contributing to test Location
 
-Thank you for your interest in contributing to test Location! 🎉
+Thanks for your interest in test Location.
 
-## Getting Started
+## Development Setup
 
-### Prerequisites
+Requirements:
 
-- Android Studio Hedgehog (2023.1.1) or later
-- JDK 8 or later
-- Android SDK 33 (API level 33)
-- Android device or emulator running Android 5.0+ (API 21+)
+- Android Studio or local Gradle installation
+- Android SDK Platform 33
+- JDK 8 or newer
+- Android device or emulator running Android 5.0 or newer
 
-### Setting Up Development Environment
+Open the project in Android Studio and sync Gradle, or build with a local Gradle command:
 
-1. **Fork** this repository
-2. **Clone** your fork:
-   ```bash
-   git clone https://github.com/YOUR_USERNAME/test-location.git
-   cd test-location
-   ```
-3. Open the project in Android Studio
-4. Sync Gradle and build the project
-
-## Development Workflow
-
-### Branching Strategy
-
-- `main` — stable release branch
-- `develop` — development branch
-- Feature branches: `feature/your-feature-name`
-- Bug fix branches: `fix/issue-description`
-
-### Commit Convention
-
-Follow [Conventional Commits](https://www.conventionalcommits.org/):
-
-```
-feat: add route simulation speed control
-fix: resolve mock location provider crash on Android 14
-docs: update API documentation
-refactor: extract location helper to utility class
-chore: update gradle plugin version
+```bash
+gradle assembleDebug
 ```
 
-### Code Style
+This repository does not include production signing keys or private deployment credentials.
 
-- Follow [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html)
-- Use 4 spaces for indentation (no tabs)
-- Keep methods concise and focused
-- Add Javadoc comments for public APIs
-- Use meaningful variable and method names
+## Pull Requests
 
-### Pull Request Process
+- Keep changes focused.
+- Test mock-location behavior on a real Android device when possible.
+- Update README or CHANGELOG when behavior changes.
+- Do not commit APK files, signing keys, `.env` files, server credentials, payment secrets, or deployment records.
 
-1. Create a feature branch from `develop`
-2. Make your changes
-3. Test on a real device if possible
-4. Update documentation if needed
-5. Submit a Pull Request to `develop` branch
-6. Ensure CI checks pass
-7. Request review from maintainers
+## Issues
 
-## Reporting Issues
-
-### Bug Reports
-
-Please include:
-- Device model and Android version
-- Steps to reproduce
-- Expected vs actual behavior
-- Screenshots or screen recordings if applicable
-- Logcat output for crashes
-
-### Feature Requests
-
-Please include:
-- Use case description
-- Proposed solution
-- Alternative approaches considered
-
-## Code of Conduct
-
-- Be respectful and inclusive
-- Focus on constructive feedback
-- Help others learn and grow
-
-## Contact
-
-- Email: aiaiks720@gmail.com
-- Issues: [GitHub Issues](https://github.com/aiaiks720/test-location/issues)
+When reporting a bug, include the Android version, device model, app version, reproduction steps, and relevant logcat output if available.
 
 ## License
 
-By contributing, you agree that your contributions will be licensed under the [MIT License](LICENSE).
+Contributions are accepted only with permission from the project owner and are subject to the repository license.
