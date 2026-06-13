@@ -1,0 +1,44 @@
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# IDE
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+*.swp
+*.swo
+*~
+
+# Android Studio
+*.jks
+*.keystore
+!debug.keystore
+local.properties
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Signing
+release.keystore
+*.keystore
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Build outputs
+*.apk
+*.aab
+*.dex
+*.class
+
+# APK signing
+app/release/
+app/debug/
