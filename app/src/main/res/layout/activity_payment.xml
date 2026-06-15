@@ -42,7 +42,7 @@
                 android:id="@+id/btn_monthly"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:text="@string/subscribe_now"
+                android:text="@string/price_monthly"
                 android:textColor="@color/white"
                 android:background="@color/colorPrimary" />
 
@@ -70,7 +70,7 @@
                 android:id="@+id/btn_yearly"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:text="@string/subscribe_now"
+                android:text="@string/price_yearly"
                 android:textColor="@color/white"
                 android:background="@color/colorAccent" />
 

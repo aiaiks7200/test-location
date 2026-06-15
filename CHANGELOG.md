@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.18 - 2026-06-15
+
+- Kept Add Usage Time page plan titles as Add One Month and Add One Year.
+- Restored the blue and orange action buttons to display the corresponding dynamic prices.
+- Published as a forced upgrade release.
+
 ## 1.17 - 2026-06-15
 
 - Corrected Add Usage Time page card titles to show Add One Month and Add One Year.

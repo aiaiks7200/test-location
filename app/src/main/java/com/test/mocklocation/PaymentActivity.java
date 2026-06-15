@@ -73,8 +73,8 @@ public class PaymentActivity extends Activity {
             monthlyPrice = monthly;
             yearlyPrice = yearly;
             wxpayEnabled = wxpay;
-            btnMonthly.setText(getString(R.string.subscribe_now));
-            btnYearly.setText(getString(R.string.subscribe_now));
+            btnMonthly.setText(getString(R.string.price_monthly_button, monthlyPrice));
+            btnYearly.setText(getString(R.string.price_yearly_button, yearlyPrice));
         }));
     }
 
