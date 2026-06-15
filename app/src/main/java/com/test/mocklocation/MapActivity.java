@@ -44,6 +44,11 @@ public class MapActivity extends Activity {
     private boolean expiredDialogShown = false;
 
     @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.wrap(newBase));
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
@@ -243,9 +248,9 @@ public class MapActivity extends Activity {
 
     private void showUpgradeDialog() {
         new AlertDialog.Builder(this)
-                .setTitle("需要升级")
-                .setMessage("发现新版本" + LicenseApiHelper.getLatestVersion(this) + "，请升级后继续使用。\n\n" + LicenseApiHelper.getChangelog(this))
-                .setPositiveButton("立即下载", (d, w) -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(LicenseApiHelper.getDownloadUrl(this)))))
+                .setTitle(getString(R.string.upgrade_required))
+                .setMessage(getString(R.string.upgrade_message, LicenseApiHelper.getLatestVersion(this), LicenseApiHelper.getChangelog(this)))
+                .setPositiveButton(getString(R.string.download_now), (d, w) -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(LicenseApiHelper.getDownloadUrl(this)))))
                 .setCancelable(false)
                 .show();
     }
@@ -258,17 +263,17 @@ public class MapActivity extends Activity {
         } catch (Exception ignored) {}
         btnStartMock.setEnabled(false);
         btnStartMock.setAlpha(0.5f);
-        tvStatus.setText("会员已到期，无法启动模拟定位");
+        tvStatus.setText(getString(R.string.expired_cannot_start_mock));
         tvStatus.setTextColor(0xFFF44336);
     }
 
     private void showExpiredDialog() {
         expiredDialogShown = true;
         new AlertDialog.Builder(this)
-                .setTitle("请购买开通会员")
-                .setMessage("会员/试用已到期，地图与开始模拟功能已停用。\n\n您可以关闭弹窗，也可以进入订阅会员界面。")
-                .setPositiveButton("订阅会员", (d, w) -> startActivity(new Intent(this, PaymentActivity.class)))
-                .setNegativeButton("关闭", null)
+                .setTitle(getString(R.string.add_usage_time_required))
+                .setMessage(getString(R.string.map_expired_dialog_message))
+                .setPositiveButton(getString(R.string.add_usage_time), (d, w) -> startActivity(new Intent(this, PaymentActivity.class)))
+                .setNegativeButton(getString(R.string.close), null)
                 .setCancelable(true)
                 .show();
     }

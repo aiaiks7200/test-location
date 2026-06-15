@@ -2,19 +2,22 @@ package com.test.mocklocation;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.ViewGroup;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import java.util.Locale;
-
 public class SettingsActivity extends Activity {
     private TrialManager trialManager;
     private TextView tvMembershipStatus;
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.wrap(newBase));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +41,11 @@ public class SettingsActivity extends Activity {
     }
 
     private void updateMembershipStatus() {
-        String text = "会员有效期：" + trialManager.getSubscriptionEndText() + "\n设备码：" + trialManager.getDeviceCode();
-        if (trialManager.hasActiveSubscription()) text += "\n状态：会员可用";
-        else if (trialManager.isTrialExpired()) text += "\n状态：已到期，请增加使用时间";
-        else text += "\n状态：试用剩余 " + trialManager.getRemainingTrialDays() + " 天";
+        String text = getString(R.string.membership_valid_until) + trialManager.getSubscriptionEndText()
+                + "\n" + getString(R.string.device_code_label) + trialManager.getDeviceCode();
+        if (trialManager.hasActiveSubscription()) text += "\n" + getString(R.string.status_member_available);
+        else if (trialManager.isTrialExpired()) text += "\n" + getString(R.string.status_expired_add_time);
+        else text += "\n" + getString(R.string.status_trial_remaining, trialManager.getRemainingTrialDays());
         tvMembershipStatus.setText(text);
     }
 
@@ -78,11 +82,7 @@ public class SettingsActivity extends Activity {
     }
 
     private void setLocale(String languageCode) {
-        Locale locale = new Locale(languageCode);
-        Locale.setDefault(locale);
-        Configuration config = new Configuration();
-        config.setLocale(locale);
-        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+        LocaleHelper.saveLanguage(this, languageCode);
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
@@ -91,13 +91,13 @@ public class SettingsActivity extends Activity {
 
     private void showAboutDialog() {
         String content = "test Location\n\n" +
-                "版本：1.13\n\n" +
-                "一款专业的模拟定位开发调试工具\n\n" +
-                "会员有效期：" + trialManager.getSubscriptionEndText() + "\n" +
-                "设备码：" + trialManager.getDeviceCode() + "\n\n" +
+                getString(R.string.version_label) + "1.14\n\n" +
+                getString(R.string.about_description) + "\n\n" +
+                getString(R.string.membership_valid_until) + trialManager.getSubscriptionEndText() + "\n" +
+                getString(R.string.device_code_label) + trialManager.getDeviceCode() + "\n\n" +
                 "联系邮箱 / Contact Email:\naiaiks720@gmail.com\n\n" +
                 "© 2026 test Location. All rights reserved.";
-        showScrollDialog("关于", content);
+        showScrollDialog(getString(R.string.about), content);
     }
 
     private void showScrollDialog(String title, String content) {
@@ -111,6 +111,6 @@ public class SettingsActivity extends Activity {
         textView.setPadding(60, 40, 60, 20);
         textView.setLineSpacing(6, 1.3f);
         scrollView.addView(textView);
-        new AlertDialog.Builder(this).setTitle(title).setView(scrollView).setPositiveButton("确定", null).show();
+        new AlertDialog.Builder(this).setTitle(title).setView(scrollView).setPositiveButton(getString(R.string.ok), null).show();
     }
 }

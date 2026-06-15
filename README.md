@@ -34,7 +34,7 @@ test Location 是一款用于 Android 设备的位置模拟软件，也可称为
 ## Current Release
 
 - App name: `test Location`
-- Version: `1.13`
+- Version: `1.14`
 - Android package: `com.test.mocklocation`
 - Minimum Android version: Android 5.0, API 21
 - Target SDK: Android 13, API 33

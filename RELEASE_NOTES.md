@@ -1,18 +1,20 @@
-# test Location 1.13
+# test Location 1.14
 
-This release publishes the Android APK and source snapshot for test Location 1.13.
+This release updates test Location to version 1.14.
 
 Highlights:
 
-- Mock GPS location from coordinates or the built-in map.
-- Start, stop, and route mock workflows.
-- Favorites and recent mock locations.
-- Trial, subscription, license, and update-check flows.
-- Multi-language app resources.
+- First launch now defaults to English.
+- Language selection now persists and applies across pages before the UI is rendered.
+- English mode now covers more page content, status text, dialogs, and buttons.
+- The English-language top language button shows `中文`.
+- The membership page is now named Add Usage Time.
+- Monthly/yearly options are now Add One Month and Add One Year.
+- Visible price text was removed from the Add Usage Time page.
 
 Installation:
 
-1. Download `test-location-1.13.apk` from this release.
+1. Download `test-location-1.14.apk` from this release.
 2. Install it on an Android device.
 3. Enable Developer Options.
 4. Set `test Location` as the mock-location app.

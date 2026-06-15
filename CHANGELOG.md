@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.14 - 2026-06-15
+
+- Default app language is now English for first-time launches.
+- Language selection is now persisted and applied before each page is rendered.
+- Fixed English mode for main page, settings, membership status, map expiration dialogs, payment flow prompts, and buttons.
+- In English mode, the top language button now shows `中文`.
+- Renamed the membership purchase page to Add Usage Time.
+- Renamed monthly/yearly options to Add One Month and Add One Year.
+- Removed visible monthly/yearly price text from the Add Usage Time page while keeping backend order amounts intact.
+
 ## 1.13 - 2026-06-12
 
 - Latest packaged release prepared for GitHub distribution.

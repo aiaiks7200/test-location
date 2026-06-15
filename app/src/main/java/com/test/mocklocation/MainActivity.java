@@ -3,11 +3,11 @@ package com.test.mocklocation;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.content.pm.PackageManager;
-import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
@@ -32,7 +32,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
-import java.util.Locale;
 
 public class MainActivity extends Activity {
     private static final int REQUEST_PERMISSIONS = 1001;
@@ -58,6 +57,11 @@ public class MainActivity extends Activity {
     private Button btnStopRecentMock;
     private RecentLocationManager recentLocationManager;
     private boolean expiredDialogShown = false;
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.wrap(newBase));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +95,7 @@ public class MainActivity extends Activity {
         Button btnPayment = findViewById(R.id.btnPayment);
         Button btnSettings = findViewById(R.id.btnSettings);
         Button btnLanguage = findViewById(R.id.btnLanguage);
+        btnLanguage.setText(LocaleHelper.getLanguageButtonText(this));
 
         btnOpenMap.setOnClickListener(v -> checkPermissionsAndOpenMap());
         btnPayment.setOnClickListener(v -> startActivity(new Intent(this, PaymentActivity.class)));
@@ -379,13 +384,13 @@ public class MainActivity extends Activity {
 
     private void checkPermissionsAndOpenMap() {
         if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(this, "\u8BF7\u5148\u6388\u4E88\u5B9A\u4F4D\u6743\u9650", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.grant_location_permission), Toast.LENGTH_SHORT).show();
             requestAllPermissions();
             return;
         }
         SharedPreferences prefs = getSharedPreferences("settings", MODE_PRIVATE);
         if (!prefs.getBoolean("agreed_terms", false)) {
-            Toast.makeText(this, "\u8BF7\u5148\u540C\u610F\u4F7F\u7528\u6761\u6B3E", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.please_agree_terms), Toast.LENGTH_SHORT).show();
             showTermsDialog();
             return;
         }
@@ -403,31 +408,31 @@ public class MainActivity extends Activity {
                 intent.setAction(MockLocationService.ACTION_STOP);
                 startService(intent);
             } catch (Exception ignored) {}
-            tvMockStatus.setText("会员已到期，停止模拟状态");
+            tvMockStatus.setText(getString(R.string.subscription_expired_stop_mock));
             tvMockStatus.setTextColor(0xFFF44336);
         } else if (MockLocationService.isServiceRunning) {
-            tvMockStatus.setText("\u6A21\u62DF\u8FD0\u884C\u4E2D: " + String.format("%.4f, %.4f",
+            tvMockStatus.setText(getString(R.string.mock_running_label) + " " + String.format("%.4f, %.4f",
                     MockLocationService.mockLatitude, MockLocationService.mockLongitude));
             tvMockStatus.setTextColor(0xFF4CAF50);
         } else {
-            tvMockStatus.setText("\u672A\u542F\u52A8");
+            tvMockStatus.setText(getString(R.string.not_started));
             tvMockStatus.setTextColor(0xFFF44336);
         }
         if (trialManager.hasActiveSubscription()) {
-            tvStatusTitle.setText("\u4F1A\u5458\u5DF2\u6FC0\u6D3B");
+            tvStatusTitle.setText(getString(R.string.member_activated));
             tvStatusTitle.setTextColor(0xFF4CAF50);
-            tvTrialInfo.setText("会员状态正常；有效期请在 设置 → 会员有效期 查看");
+            tvTrialInfo.setText(getString(R.string.member_status_normal));
             progressBar.setVisibility(View.GONE);
         } else if (trialManager.isTrialExpired()) {
-            tvStatusTitle.setText("\u8BD5\u7528\u5DF2\u8FC7\u671F");
+            tvStatusTitle.setText(getString(R.string.trial_expired));
             tvStatusTitle.setTextColor(0xFFF44336);
-            tvTrialInfo.setText("会员/试用已到期，打开地图和开始模拟功能已停用，请开通会员");
+            tvTrialInfo.setText(getString(R.string.expired_feature_disabled));
             progressBar.setVisibility(View.GONE);
         } else {
             int remaining = trialManager.getRemainingTrialDays();
-            tvStatusTitle.setText("\u514D\u8D39\u8BD5\u7528\u4E2D");
+            tvStatusTitle.setText(getString(R.string.free_trial));
             tvStatusTitle.setTextColor(0xFF1976D2);
-            tvTrialInfo.setText("\u5269\u4F59\u8BD5\u7528\u5929\u6570\uFF1A" + remaining + "\u5929");
+            tvTrialInfo.setText(getString(R.string.remaining_trial_days_format, remaining));
             progressBar.setVisibility(View.VISIBLE);
             progressBar.setMax(trialManager.getTotalTrialDays());
             progressBar.setProgress(remaining);
@@ -444,7 +449,7 @@ public class MainActivity extends Activity {
 
     private void bindRecentLocation(int index, RecentLocationManager.LocationItem item, TextView textView, Button button) {
         if (item == null) {
-            String empty = index == 0 ? "暂无最近地点" : (index == 1 ? "暂无第二个最近地点" : "暂无第三个最近地点");
+            String empty = index == 0 ? getString(R.string.no_recent_location_1) : (index == 1 ? getString(R.string.no_recent_location_2) : getString(R.string.no_recent_location_3));
             textView.setText(empty);
             textView.setTextColor(0xFF999999);
             button.setEnabled(false);
@@ -473,30 +478,30 @@ public class MainActivity extends Activity {
 
     private void showMockLocationGuide() {
         new AlertDialog.Builder(this)
-                .setTitle("请设置模拟位置应用")
-                .setMessage("请在开发者选项中，把 test location 设为'选择模拟位置信息应用'，然后再启动模拟。")
-                .setPositiveButton("去设置", (d, w) -> {
+                .setTitle(getString(R.string.mock_location_guide_title))
+                .setMessage(getString(R.string.mock_location_guide_message))
+                .setPositiveButton(getString(R.string.go_settings), (d, w) -> {
                     try { startActivity(new Intent(android.provider.Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS)); }
                     catch (Exception e) { startActivity(new Intent(android.provider.Settings.ACTION_SETTINGS)); }
                 })
-                .setNegativeButton("稍后", null)
+                .setNegativeButton(getString(R.string.later), null)
                 .show();
     }
 
     private void startRecentLocation(int index) {
         List<RecentLocationManager.LocationItem> items = recentLocationManager.getRecentLocations();
         if (index < 0 || index >= items.size()) {
-            Toast.makeText(this, "暂无可启动的最近地点", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.no_recent_location_available), Toast.LENGTH_SHORT).show();
             return;
         }
         if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(this, "请先授予定位权限", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.grant_location_permission), Toast.LENGTH_SHORT).show();
             requestAllPermissions();
             return;
         }
         SharedPreferences prefs = getSharedPreferences("settings", MODE_PRIVATE);
         if (!prefs.getBoolean("agreed_terms", false)) {
-            Toast.makeText(this, "请先同意使用条款", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.please_agree_terms), Toast.LENGTH_SHORT).show();
             showTermsDialog();
             return;
         }
@@ -515,10 +520,10 @@ public class MainActivity extends Activity {
         intent.putExtra("lng", item.lng);
         startService(intent);
         recentLocationManager.saveRecent(item.lat, item.lng);
-        tvMockStatus.setText("模拟运行中: " + String.format("%.4f, %.4f", item.lat, item.lng));
+        tvMockStatus.setText(getString(R.string.mock_running_label) + " " + String.format("%.4f, %.4f", item.lat, item.lng));
         tvMockStatus.setTextColor(0xFF4CAF50);
         updateRecentLocationsUI();
-        Toast.makeText(this, "已启动最近地点模拟", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.recent_mock_started), Toast.LENGTH_SHORT).show();
         checkServerLicense(false);
     }
 
@@ -526,9 +531,9 @@ public class MainActivity extends Activity {
         Intent intent = new Intent(this, MockLocationService.class);
         intent.setAction(MockLocationService.ACTION_STOP);
         startService(intent);
-        tvMockStatus.setText("未启动");
+        tvMockStatus.setText(getString(R.string.not_started));
         tvMockStatus.setTextColor(0xFFF44336);
-        Toast.makeText(this, "已停止模拟", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.mock_stopped_toast), Toast.LENGTH_SHORT).show();
     }
 
 
@@ -551,21 +556,21 @@ public class MainActivity extends Activity {
     }
 
     private void showUpgradeDialog() {
-        String msg = "发现新版本" + LicenseApiHelper.getLatestVersion(this) + "，请升级后继续使用。\n\n" + LicenseApiHelper.getChangelog(this);
+        String msg = getString(R.string.upgrade_message, LicenseApiHelper.getLatestVersion(this), LicenseApiHelper.getChangelog(this));
         new AlertDialog.Builder(this)
-                .setTitle("需要升级")
+                .setTitle(getString(R.string.upgrade_required))
                 .setMessage(msg)
-                .setPositiveButton("立即下载", (d, w) -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(LicenseApiHelper.getDownloadUrl(this)))))
+                .setPositiveButton(getString(R.string.download_now), (d, w) -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(LicenseApiHelper.getDownloadUrl(this)))))
                 .setCancelable(false)
                 .show();
     }
 
     private void showExpiredDialog(boolean forceExit) {
         new AlertDialog.Builder(this)
-                .setTitle("请购买增加使用时间")
-                .setMessage("会员/试用已到期，打开地图和开始模拟功能已停用。\n\n月度会员：¥19.8/月\n年度会员：¥168/年\n\n您可以关闭弹窗，也可以进入订阅界面。")
-                .setPositiveButton("订阅", (d, w) -> startActivity(new Intent(this, PaymentActivity.class)))
-                .setNegativeButton("关闭", null)
+                .setTitle(getString(R.string.add_usage_time_required))
+                .setMessage(getString(R.string.expired_dialog_message))
+                .setPositiveButton(getString(R.string.add_usage_time), (d, w) -> startActivity(new Intent(this, PaymentActivity.class)))
+                .setNegativeButton(getString(R.string.close), null)
                 .setCancelable(true).show();
     }
 
@@ -579,11 +584,7 @@ public class MainActivity extends Activity {
     }
 
     private void setLocale(String languageCode) {
-        Locale locale = new Locale(languageCode);
-        Locale.setDefault(locale);
-        Configuration config = new Configuration();
-        config.setLocale(locale);
-        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+        LocaleHelper.saveLanguage(this, languageCode);
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
@@ -596,7 +597,7 @@ public class MainActivity extends Activity {
         if (requestCode == REQUEST_PERMISSIONS) {
             for (int r : grantResults) {
                 if (r != PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(this, "\u9700\u8981\u5B9A\u4F4D\u6743\u9650", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, getString(R.string.permission_required), Toast.LENGTH_LONG).show();
                     return;
                 }
             }

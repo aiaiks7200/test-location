@@ -31,7 +31,7 @@
                 android:id="@+id/btnLanguage"
                 android:layout_width="wrap_content"
                 android:layout_height="36dp"
-                android:text="🌐 语言"
+                android:text="中文"
                 android:textSize="13sp"
                 android:textColor="#FFFFFF"
                 android:background="#9C27B0"
@@ -43,7 +43,7 @@
                 android:id="@+id/btnSettings"
                 android:layout_width="wrap_content"
                 android:layout_height="36dp"
-                android:text="⚙ 设置"
+                android:text="@string/settings"
                 android:textSize="13sp"
                 android:textColor="#FFFFFF"
                 android:background="#757575"
@@ -65,7 +65,7 @@
                 android:id="@+id/tvStatusTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="免费试用中"
+                android:text="@string/free_trial"
                 android:textSize="22sp"
                 android:textColor="@color/colorPrimary"
                 android:textStyle="bold" />
@@ -74,7 +74,7 @@
                 android:id="@+id/tvTrialInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="剩余试用天数：15天"
+                android:text="@string/trial_days_remaining_example"
                 android:textSize="15sp"
                 android:textColor="#757575"
                 android:layout_marginTop="6dp" />
@@ -101,7 +101,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="模拟定位状态"
+                android:text="@string/mock_location_status"
                 android:textSize="16sp"
                 android:textColor="#212121"
                 android:textStyle="bold" />
@@ -110,7 +110,7 @@
                 android:id="@+id/tvMockStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="未启动"
+                android:text="@string/not_started"
                 android:textSize="14sp"
                 android:textColor="#F44336"
                 android:layout_marginTop="6dp" />
@@ -119,7 +119,7 @@
                 android:id="@+id/btnOpenMap"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:text="打开地图"
+                android:text="@string/open_map"
                 android:textSize="16sp"
                 android:textColor="#FFFFFF"
                 android:background="@color/colorPrimary"
@@ -131,7 +131,7 @@
             android:id="@+id/btnPayment"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:text="增加使用时间"
+            android:text="@string/add_usage_time"
             android:textSize="16sp"
             android:textColor="#FFFFFF"
             android:background="@color/green"
@@ -150,7 +150,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="最近模拟地点"
+                android:text="@string/recent_mock_locations"
                 android:textSize="16sp"
                 android:textColor="#212121"
                 android:textStyle="bold" />
@@ -158,7 +158,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="自动保存最近 3 个独立地点，下次可直接启动模拟。"
+                android:text="@string/recent_locations_hint"
                 android:textSize="13sp"
                 android:textColor="#757575"
                 android:layout_marginTop="4dp" />
@@ -174,7 +174,7 @@
                     android:id="@+id/tvRecent1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="暂无最近地点"
+                    android:text="@string/no_recent_location_1"
                     android:textSize="14sp"
                     android:textColor="#333333" />
 
@@ -182,7 +182,7 @@
                     android:id="@+id/btnStartRecent1"
                     android:layout_width="match_parent"
                     android:layout_height="42dp"
-                    android:text="启动模拟"
+                    android:text="@string/start_mock"
                     android:textSize="14sp"
                     android:textColor="#FFFFFF"
                     android:background="@color/colorPrimary"
@@ -200,7 +200,7 @@
                     android:id="@+id/tvRecent2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="暂无第二个最近地点"
+                    android:text="@string/no_recent_location_2"
                     android:textSize="14sp"
                     android:textColor="#333333" />
 
@@ -208,7 +208,7 @@
                     android:id="@+id/btnStartRecent2"
                     android:layout_width="match_parent"
                     android:layout_height="42dp"
-                    android:text="启动模拟"
+                    android:text="@string/start_mock"
                     android:textSize="14sp"
                     android:textColor="#FFFFFF"
                     android:background="@color/colorPrimary"
@@ -226,7 +226,7 @@
                     android:id="@+id/tvRecent3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="暂无第三个最近地点"
+                    android:text="@string/no_recent_location_3"
                     android:textSize="14sp"
                     android:textColor="#333333" />
 
@@ -234,7 +234,7 @@
                     android:id="@+id/btnStartRecent3"
                     android:layout_width="match_parent"
                     android:layout_height="42dp"
-                    android:text="启动模拟"
+                    android:text="@string/start_mock"
                     android:textSize="14sp"
                     android:textColor="#FFFFFF"
                     android:background="@color/colorPrimary"
@@ -245,7 +245,7 @@
                 android:id="@+id/btnStopRecentMock"
                 android:layout_width="match_parent"
                 android:layout_height="42dp"
-                android:text="停止模拟"
+                android:text="@string/stop_mock"
                 android:textSize="14sp"
                 android:textColor="#FFFFFF"
                 android:background="#F44336"

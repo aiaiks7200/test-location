@@ -2,6 +2,7 @@ package com.test.mocklocation;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -31,6 +32,11 @@ public class PaymentActivity extends Activity {
     private String currentH5Url;
     private String currentWechatPayUrl;
     private boolean wxpayEnabled = true; // 默认开启，从服务器读取
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.wrap(newBase));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,32 +73,33 @@ public class PaymentActivity extends Activity {
             monthlyPrice = monthly;
             yearlyPrice = yearly;
             wxpayEnabled = wxpay;
-            btnMonthly.setText("月度会员 ¥" + monthlyPrice + "/月");
-            btnYearly.setText("年度会员 ¥" + yearlyPrice + "/年");
+            btnMonthly.setText(getString(R.string.monthly_plan));
+            btnYearly.setText(getString(R.string.yearly_plan));
         }));
     }
 
     private void updateInitialStatus() {
-        String msg = "设备码：" + trialManager.getDeviceCode() + "\n会员有效期：" + trialManager.getSubscriptionEndText();
+        String msg = getString(R.string.device_code_label) + trialManager.getDeviceCode()
+                + "\n" + getString(R.string.membership_valid_until) + trialManager.getSubscriptionEndText();
         if (trialManager.hasActiveSubscription()) {
-            msg += "\n当前会员未到期，重复进入本页面不会增加时长；只有新订单真实支付成功才会续期。";
+            msg += "\n" + getString(R.string.active_member_order_notice);
         }
         tvStatus.setText(msg);
     }
 
     private void showPayMethodDialog(final String amount, final String subject) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("选择支付方式")
-               .setMessage("设备码：" + trialManager.getDeviceCode() + "\n将按当前设备绑定会员。\n\n请选择支付方式：")
-               .setPositiveButton("支付宝支付", (dialog, which) -> {
+        builder.setTitle(getString(R.string.select_payment_method))
+               .setMessage(getString(R.string.payment_device_bind_message, trialManager.getDeviceCode()))
+               .setPositiveButton(getString(R.string.alipay), (dialog, which) -> {
                    selectedPayType = "alipay";
                    createOrder(amount, subject + "-" + trialManager.getDeviceCode());
                })
-               .setNegativeButton("取消", null);
+               .setNegativeButton(getString(R.string.cancel), null);
 
         // 根据服务器设置决定是否显示微信支付
         if (wxpayEnabled) {
-            builder.setNeutralButton("微信支付", (dialog, which) -> {
+            builder.setNeutralButton(getString(R.string.wechat_pay), (dialog, which) -> {
                 selectedPayType = "wxpay";
                 createOrder(amount, subject + "-" + trialManager.getDeviceCode());
             });
@@ -118,7 +125,7 @@ public class PaymentActivity extends Activity {
                             currentPayUrl = payUrl;
                             currentH5Url = h5Url;
                             currentWechatPayUrl = wechatPayUrl;
-                            tvStatus.setText(getString(R.string.order_created) + "\n订单号：" + currentOrderId);
+                            tvStatus.setText(getString(R.string.order_created) + "\n" + getString(R.string.order_no_label) + currentOrderId);
                             openPayUrl();
                             handler.removeCallbacks(pollRunnable);
                             handler.postDelayed(pollRunnable, 3000);
@@ -129,8 +136,8 @@ public class PaymentActivity extends Activity {
                         runOnUiThread(() -> {
                             tvStatus.setText(getString(R.string.order_failed) + error);
                             new AlertDialog.Builder(PaymentActivity.this)
-                                    .setTitle("创建订单失败")
-                                    .setMessage("无法拉起支付，请检查网络后重试。\n\n错误信息：" + error)
+                                    .setTitle(getString(R.string.create_order_failed_title))
+                                    .setMessage(getString(R.string.create_order_failed_message, error))
                                     .setPositiveButton(getString(R.string.ok), null)
                                     .show();
                         });
@@ -146,7 +153,7 @@ public class PaymentActivity extends Activity {
         String url = currentPayUrl;
         if (url == null || url.isEmpty()) url = currentH5Url;
         if (url == null || url.isEmpty()) {
-            tvStatus.setText("支付链接为空，请重试");
+            tvStatus.setText(getString(R.string.empty_payment_link));
             return;
         }
         try {
@@ -154,14 +161,14 @@ public class PaymentActivity extends Activity {
             startActivity(intent);
         } catch (ActivityNotFoundException e) {
             new AlertDialog.Builder(this)
-                    .setTitle("请打开支付链接")
-                    .setMessage("当前设备没有可打开支付页面的浏览器，请复制或手动打开：\n\n" + url)
+                    .setTitle(getString(R.string.open_payment_link_title))
+                    .setMessage(getString(R.string.open_payment_link_message, url))
                     .setPositiveButton(getString(R.string.ok), null)
                     .show();
         } catch (Exception e) {
             new AlertDialog.Builder(this)
-                    .setTitle("支付跳转失败")
-                    .setMessage("支付链接：\n" + url + "\n\n错误：" + e.getMessage())
+                    .setTitle(getString(R.string.payment_redirect_failed))
+                    .setMessage(getString(R.string.payment_redirect_failed_message, url, e.getMessage()))
                     .setPositiveButton(getString(R.string.ok), null)
                     .show();
         }
@@ -173,7 +180,7 @@ public class PaymentActivity extends Activity {
         String payLink = currentH5Url;
         if (payLink == null || payLink.isEmpty()) payLink = currentPayUrl;
         if (payLink == null || payLink.isEmpty()) {
-            tvStatus.setText("支付链接为空，请重试");
+            tvStatus.setText(getString(R.string.empty_payment_link));
             return;
         }
         final String url = payLink;
@@ -182,14 +189,14 @@ public class PaymentActivity extends Activity {
             startActivity(intent);
         } catch (ActivityNotFoundException e) {
             new AlertDialog.Builder(this)
-                    .setTitle("请打开支付链接")
-                    .setMessage("当前设备没有可打开支付页面的浏览器，请复制或手动打开：\n\n" + url)
+                    .setTitle(getString(R.string.open_payment_link_title))
+                    .setMessage(getString(R.string.open_payment_link_message, url))
                     .setPositiveButton(getString(R.string.ok), null)
                     .show();
         } catch (Exception e) {
             new AlertDialog.Builder(this)
-                    .setTitle("支付跳转失败")
-                    .setMessage("支付链接：\n" + url + "\n\n错误：" + e.getMessage())
+                    .setTitle(getString(R.string.payment_redirect_failed))
+                    .setMessage(getString(R.string.payment_redirect_failed_message, url, e.getMessage()))
                     .setPositiveButton(getString(R.string.ok), null)
                     .show();
         }
@@ -222,11 +229,11 @@ public class PaymentActivity extends Activity {
                             } else {
                                 activatedThisOrder = true;
                                 handler.removeCallbacks(pollRunnable);
-                                tvStatus.setText("该订单已处理过，不会重复增加会员时长。\n会员有效期：" + trialManager.getSubscriptionEndText());
-                                Toast.makeText(PaymentActivity.this, "订单已处理过", Toast.LENGTH_LONG).show();
+                                tvStatus.setText(getString(R.string.order_already_processed) + "\n" + getString(R.string.membership_valid_until) + trialManager.getSubscriptionEndText());
+                                Toast.makeText(PaymentActivity.this, getString(R.string.order_already_processed_toast), Toast.LENGTH_LONG).show();
                             }
                         } else {
-                            tvStatus.setText(getString(R.string.waiting_payment) + attempt + "\n状态：" + status);
+                            tvStatus.setText(getString(R.string.waiting_payment) + attempt + "\n" + getString(R.string.status_label) + status);
                             handler.postDelayed(pollRunnable, 3000);
                         }
                     });
@@ -243,10 +250,10 @@ public class PaymentActivity extends Activity {
     };
 
     private void showPaymentSuccessDialog() {
-        tvStatus.setText(getString(R.string.payment_success) + "\n会员有效期：" + trialManager.getSubscriptionEndText());
+        tvStatus.setText(getString(R.string.payment_success) + "\n" + getString(R.string.membership_valid_until) + trialManager.getSubscriptionEndText());
         new AlertDialog.Builder(PaymentActivity.this)
                 .setTitle(getString(R.string.payment_success))
-                .setMessage(getString(R.string.payment_success_message) + "\n会员有效期：" + trialManager.getSubscriptionEndText())
+                .setMessage(getString(R.string.payment_success_message) + "\n" + getString(R.string.membership_valid_until) + trialManager.getSubscriptionEndText())
                 .setPositiveButton(getString(R.string.ok), (d, w) -> finish())
                 .setCancelable(false)
                 .show();

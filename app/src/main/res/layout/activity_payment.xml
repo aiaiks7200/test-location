@@ -38,21 +38,11 @@
                 android:textColor="@color/text_primary"
                 android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/price_monthly"
-                android:textSize="32sp"
-                android:textColor="@color/colorAccent"
-                android:textStyle="bold"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="16dp" />
-
             <Button
                 android:id="@+id/btn_monthly"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:text="立即订阅"
+                android:text="@string/monthly_plan"
                 android:textColor="@color/white"
                 android:background="@color/colorPrimary" />
 
@@ -76,21 +66,11 @@
                 android:textColor="@color/text_primary"
                 android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/price_yearly"
-                android:textSize="32sp"
-                android:textColor="@color/colorAccent"
-                android:textStyle="bold"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="16dp" />
-
             <Button
                 android:id="@+id/btn_yearly"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:text="立即订阅"
+                android:text="@string/yearly_plan"
                 android:textColor="@color/white"
                 android:background="@color/colorAccent" />
 
