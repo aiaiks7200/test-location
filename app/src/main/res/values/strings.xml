@@ -123,4 +123,5 @@
     <string name="order_already_processed">This order has already been processed and will not add usage time again.</string>
     <string name="order_already_processed_toast">Order already processed</string>
     <string name="status_label">Status: </string>
+    <string name="official_website_footer">Official website: https://dw.locati.xyz</string>
 </resources>

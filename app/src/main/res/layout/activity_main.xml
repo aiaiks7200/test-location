@@ -252,5 +252,16 @@
                 android:layout_marginTop="12dp" />
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/tvOfficialWebsite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/official_website_footer"
+            android:textSize="12sp"
+            android:textColor="#757575"
+            android:gravity="center"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="8dp" />
+
     </LinearLayout>
 </ScrollView>

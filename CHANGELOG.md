@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.15 - 2026-06-15
+
+- Added the official website address to the small footer text on the app home page.
+- Published as a forced upgrade release.
+
 ## 1.14 - 2026-06-15
 
 - Default app language is now English for first-time launches.

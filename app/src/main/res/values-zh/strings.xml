@@ -123,4 +123,5 @@
     <string name="order_already_processed">该订单已处理过，不会重复增加会员时长。</string>
     <string name="order_already_processed_toast">订单已处理过</string>
     <string name="status_label">状态：</string>
+    <string name="official_website_footer">官网地址：https://dw.locati.xyz</string>
 </resources>
