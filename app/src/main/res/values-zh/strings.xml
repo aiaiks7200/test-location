@@ -14,6 +14,8 @@
     <string name="yearly_plan">增加一年使用</string>
     <string name="price_monthly">¥19.8/月</string>
     <string name="price_yearly">¥168/年</string>
+    <string name="price_monthly_button">¥%1$s/月</string>
+    <string name="price_yearly_button">¥%1$s/年</string>
     <string name="trial_days_remaining">试用剩余天数: %d 天</string>
     <string name="trial_expired">试用已过期</string>
     <string name="current_location">当前位置</string>

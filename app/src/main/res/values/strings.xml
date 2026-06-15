@@ -14,6 +14,8 @@
     <string name="yearly_plan">Add One Year</string>
     <string name="price_monthly">¥19.8/month</string>
     <string name="price_yearly">¥168/year</string>
+    <string name="price_monthly_button">¥%1$s/month</string>
+    <string name="price_yearly_button">¥%1$s/year</string>
     <string name="trial_days_remaining">Trial days remaining: %d days</string>
     <string name="trial_expired">Trial Expired</string>
     <string name="current_location">Current Location</string>

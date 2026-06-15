@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.16 - 2026-06-15
+
+- Restored Add Usage Time page action buttons to show the corresponding prices.
+- Kept the plan card titles as Add One Month and Add One Year.
+- Published as a forced upgrade release.
+
 ## 1.15 - 2026-06-15
 
 - Added the official website address to the small footer text on the app home page.

@@ -1,16 +1,17 @@
-# test Location 1.15
+# test Location 1.16
 
-This release updates test Location to version 1.15.
+This release updates test Location to version 1.16.
 
 Highlights:
 
-- Added the official website address to the small footer text on the app home page.
-- Retains the 1.14 language-switching and Add Usage Time improvements.
+- Restored the Add Usage Time page buttons to show the corresponding prices.
+- Plan card titles remain Add One Month and Add One Year.
+- Retains the 1.15 official website footer.
 - Published as a forced upgrade release.
 
 Installation:
 
-1. Download `test-location-1.15.apk` from this release.
+1. Download `test-location-1.16.apk` from this release.
 2. Install it on an Android device.
 3. Enable Developer Options.
 4. Set `test Location` as the mock-location app.
