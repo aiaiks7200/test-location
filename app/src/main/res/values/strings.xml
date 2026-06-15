@@ -66,7 +66,7 @@
     <string name="location_permission_needed">Location permission is required for mock location</string>
     <string name="privacy_policy_content">Welcome to test Location!\n\nWe highly value your personal information. Your trust is very important to us. We strictly follow laws and regulations to protect the security of your personal information.\n\nIf you have any questions, opinions or suggestions about this policy, please contact us at aiai720@gmail.com.</string>
     <string name="user_agreement_content">test Location User Agreement\n\nWelcome to test Location!\n\nTo use test Location software (\"the Software\"), you should read and comply with the test Location User Agreement between you and the test Location developer.\n\nContact email: aiai720@gmail.com\n\nI. Definition\ntest Location is a development debugging tool APP that helps developers with software development, function debugging, application compatibility testing and other location-related features.\n\nII. Usage Rules\nYou should comply with relevant laws and regulations and shall not use this software for illegal activities.\n\nIII. Disclaimer\nThis software is for development and testing purposes only. Users should bear all consequences arising from the use of this software.</string>
-    <string name="subscribe_now">Add Usage Time</string>
+    <string name="subscribe_now">Subscribe Now</string>
     <string name="select_payment_method">Select Payment Method</string>
     <string name="creating_order">Creating order...</string>
     <string name="order_created">Order created, redirecting to payment...</string>

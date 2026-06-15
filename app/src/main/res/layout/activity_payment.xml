@@ -33,7 +33,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/price_monthly"
+                android:text="@string/monthly_plan"
                 android:textSize="20sp"
                 android:textColor="@color/text_primary"
                 android:textStyle="bold" />
@@ -42,7 +42,7 @@
                 android:id="@+id/btn_monthly"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:text="@string/monthly_plan"
+                android:text="@string/subscribe_now"
                 android:textColor="@color/white"
                 android:background="@color/colorPrimary" />
 
@@ -61,7 +61,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/price_yearly"
+                android:text="@string/yearly_plan"
                 android:textSize="20sp"
                 android:textColor="@color/text_primary"
                 android:textStyle="bold" />
@@ -70,7 +70,7 @@
                 android:id="@+id/btn_yearly"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:text="@string/yearly_plan"
+                android:text="@string/subscribe_now"
                 android:textColor="@color/white"
                 android:background="@color/colorAccent" />
 

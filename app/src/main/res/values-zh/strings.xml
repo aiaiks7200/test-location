@@ -66,7 +66,7 @@
     <string name="location_permission_needed">需要定位权限才能使用模拟定位功能</string>
     <string name="privacy_policy_content">欢迎您使用 test Location 软件！\n\n我们深知个人信息对您的重要性，您的信赖对我们非常重要，我们将严格遵守法律法规要求采取相应的安全保护措施、保护您的个人信息安全性。\n\n如对本政策内容有任何疑问、意见或建议，您可通过邮箱 aiai720@gmail.com 与我们联系。</string>
     <string name="user_agreement_content">test Location 用户协议\n\n欢迎您使用 test Location 软件！\n\n为使用 test Location 软件（简称"本软件"），您应当阅读和遵守由您和 test Location 开发者订立的《test Location 用户协议》。\n\n联系邮箱：aiai720@gmail.com\n\n一、定义\ntest Location 是一款帮助开发人员进行软件开发、功能调试、应用兼容性测试等位置信息相关功能的开发调试工具APP。\n\n二、使用规范\n您应遵守相关法律法规，不得利用本软件从事违法违规活动。\n\n三、免责声明\n本软件仅供开发测试用途，用户应自行承担使用本软件产生的一切后果。</string>
-    <string name="subscribe_now">增加使用时间</string>
+    <string name="subscribe_now">立即订阅</string>
     <string name="select_payment_method">选择支付方式</string>
     <string name="creating_order">正在创建订单...</string>
     <string name="order_created">订单已创建，跳转支付中...</string>

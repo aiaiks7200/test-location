@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.17 - 2026-06-15
+
+- Corrected Add Usage Time page card titles to show Add One Month and Add One Year.
+- Restored the blue and orange action buttons to their original Subscribe Now text.
+- Published as a forced upgrade release.
+
 ## 1.16 - 2026-06-15
 
 - Restored Add Usage Time page action buttons to show the corresponding prices.
